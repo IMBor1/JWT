@@ -1,5 +1,6 @@
 package com.test.JWT.config;
 
+import com.test.JWT.model.Role;
 import com.test.JWT.service.OurUserDetailedService;
 import com.test.JWT.utils.JwtAuthenticationFilter;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -26,12 +27,12 @@ public class SecurityConfig {
 
     private final OurUserDetailedService ourUserDetailedService;
     private final JwtAuthenticationFilter jwtAuthenticationFilter;
-    private final LoggingFilter loggingFilter;
+    private final User user;
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
-                .csrf(csrf -> csrf.disable()) // Отключаем CSRF для REST API
+                .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(auth ->
                         auth
                 .requestMatchers("/login").permitAll()
@@ -63,9 +64,9 @@ public class SecurityConfig {
     public UserDetailsService userDetailsService() {
         var userDetailsManager = new InMemoryUserDetailsManager();
         userDetailsManager.createUser(User.withDefaultPasswordEncoder()
-                .username("user")
-                .password("password")
-                .roles("USER")
+                .username(user.getUsername())
+                .password(user.getPassword())
+                .roles(user.getRole())
                 .build());
         return userDetailsManager;
     }

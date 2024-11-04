@@ -1,13 +1,17 @@
-package com.test.JWT.entity;
+package com.test.JWT.model;
 
+import com.test.JWT.repository.UserRepository;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
-
+@AllArgsConstructor
+@NoArgsConstructor
 @Getter
 @Setter
 @Entity
-public class User {
+public class User  {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -16,10 +20,14 @@ public class User {
 
     private String password;
 
+
     @Enumerated(EnumType.STRING)
     private Role role;
 
     private boolean isAccountNonLocked = true;
 
+    public void setRole(Role role) {
+        this.role = role;
+    }
 }
 

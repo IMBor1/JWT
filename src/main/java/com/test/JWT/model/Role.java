@@ -1,7 +1,6 @@
-package com.test.JWT.entity;
+package com.test.JWT.model;
 
 import lombok.Getter;
-import lombok.Setter;
 
 @Getter
 public enum Role {

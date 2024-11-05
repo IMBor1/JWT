@@ -17,6 +17,7 @@ public class User  {
     private Long id;
 
     private String username;
+    private String email;
 
     private String password;
 
@@ -25,6 +26,10 @@ public class User  {
     private Role role;
 
     private boolean isAccountNonLocked = true;
+
+    public User(String name, String email, Role role) {
+
+    }
 
     public void setRole(Role role) {
         this.role = role;
